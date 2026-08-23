@@ -8,3 +8,7 @@ mlflow
 pandas
 scikit-learn
 tabulate
+optuna
+joblib
+pytest
+pytest-cov
