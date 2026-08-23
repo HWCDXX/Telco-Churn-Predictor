@@ -30,8 +30,9 @@ jobs:
       - name: Run Pytest Suite
         env:
           MLFLOW_ALLOW_FILE_STORE: "true"
+          PYTHONPATH: "."
         run: |
-          pytest tests/ -v
+          python -m pytest tests/ -v
 
   docker-build:
     name: Validate Docker Stack Build
