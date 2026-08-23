@@ -30,6 +30,7 @@ jobs:
       - name: Run Pytest Suite
         env:
           MLFLOW_ALLOW_FILE_STORE: "true"
+          MLFLOW_TRACKING_URI: "file:./mlruns_ci"
           PYTHONPATH: "."
         run: |
           python -m pytest tests/ -v
