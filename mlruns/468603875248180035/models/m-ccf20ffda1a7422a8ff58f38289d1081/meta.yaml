@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/waghm/MY%20PROJECTS/mlruns/468603875248180035/models/m-ccf20ffda1a7422a8ff58f38289d1081/artifacts
+creation_timestamp: 1787129011224
+experiment_id: '468603875248180035'
+last_updated_timestamp: 1787129038675
+model_id: m-ccf20ffda1a7422a8ff58f38289d1081
+model_type: null
+name: model
+source_run_id: cf0922c175bc4d88892e8cd74be85cde
+status: 2
+status_message: null

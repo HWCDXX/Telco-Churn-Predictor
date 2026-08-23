@@ -1,0 +1,9 @@
+artifact_location: file:///C:/Users/waghm/MY%20PROJECTS/Telco%20Churn%20Predictor/mlruns/454193152019358917
+creation_time: 1787130706112
+effective_trace_archival_retention: null
+experiment_id: '454193152019358917'
+last_update_time: 1787130706112
+lifecycle_stage: active
+name: Validation_Test_Run
+trace_location: null
+workspace: default

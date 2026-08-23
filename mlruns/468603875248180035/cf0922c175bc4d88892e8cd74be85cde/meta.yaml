@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/waghm/MY%20PROJECTS/mlruns/468603875248180035/cf0922c175bc4d88892e8cd74be85cde/artifacts
+end_time: 1787129038712
+entry_point_name: ''
+experiment_id: '468603875248180035'
+lifecycle_stage: active
+run_id: cf0922c175bc4d88892e8cd74be85cde
+run_name: merciful-doe-16
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1787129010722
+status: 3
+tags: []
+user_id: waghm

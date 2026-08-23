@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build:
+      context: .
+      target: fastapi
+    container_name: telco_fastapi_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./mlruns:/app/mlruns
+    environment:
+      - MLFLOW_ALLOW_FILE_STORE=true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  streamlit:
+    build:
+      context: .
+      target: streamlit
+    container_name: telco_streamlit_frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - FASTAPI_URL=http://fastapi:8000
+    depends_on:
+      fastapi:
+        condition: service_healthy
