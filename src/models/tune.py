@@ -66,7 +66,9 @@ if __name__ == "__main__":
     from load_data import load_raw_data
     from preprocess import run_preprocessing_pipeline
 
-    raw_path = r"C:\Users\waghm\MY PROJECTS\Telco Churn Predictor\data\raw\telco_churn.csv"
+    raw_path = (
+        r"C:\Users\waghm\MY PROJECTS\Telco Churn Predictor\data\raw\telco_churn.csv"
+    )
     df = engineer_features(run_preprocessing_pipeline(load_raw_data(raw_path)))
 
     X = df.drop(columns=["Churn"])

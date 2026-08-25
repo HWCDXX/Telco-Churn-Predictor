@@ -39,7 +39,9 @@ class TestTelcoPipeline(unittest.TestCase):
         df_feat = engineer_features(df_prep)
 
         bool_cols = df_feat.select_dtypes(include=["bool"]).columns
-        self.assertEqual(len(bool_cols), 0, f"Unconverted boolean columns found: {bool_cols}")
+        self.assertEqual(
+            len(bool_cols), 0, f"Unconverted boolean columns found: {bool_cols}"
+        )
         print("✅ Test 03 Passed: Feature Engineering")
 
     def test_04_training_and_mlflow(self):

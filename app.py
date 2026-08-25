@@ -58,33 +58,23 @@ with col1:
 
 with col2:
     st.markdown("#### 🌐 Subscribed Services")
-    internet_service = st.selectbox(
-        "Internet Service", ["Fiber optic", "DSL", "No"]
-    )
+    internet_service = st.selectbox("Internet Service", ["Fiber optic", "DSL", "No"])
     online_security = st.selectbox(
         "Online Security", ["No", "Yes", "No internet service"]
     )
-    online_backup = st.selectbox(
-        "Online Backup", ["No", "Yes", "No internet service"]
-    )
+    online_backup = st.selectbox("Online Backup", ["No", "Yes", "No internet service"])
     device_protection = st.selectbox(
         "Device Protection", ["No", "Yes", "No internet service"]
     )
-    tech_support = st.selectbox(
-        "Tech Support", ["No", "Yes", "No internet service"]
-    )
-    streaming_tv = st.selectbox(
-        "Streaming TV", ["No", "Yes", "No internet service"]
-    )
+    tech_support = st.selectbox("Tech Support", ["No", "Yes", "No internet service"])
+    streaming_tv = st.selectbox("Streaming TV", ["No", "Yes", "No internet service"])
     streaming_movies = st.selectbox(
         "Streaming Movies", ["No", "Yes", "No internet service"]
     )
 
 with col3:
     st.markdown("#### 💳 Account & Financials")
-    contract = st.selectbox(
-        "Contract Type", ["Month-to-month", "One year", "Two year"]
-    )
+    contract = st.selectbox("Contract Type", ["Month-to-month", "One year", "Two year"])
     paperless_billing = st.selectbox("Paperless Billing", ["Yes", "No"])
     payment_method = st.selectbox(
         "Payment Method",
@@ -96,9 +86,7 @@ with col3:
         ],
     )
     phone_service = st.selectbox("Phone Service", ["Yes", "No"])
-    multiple_lines = st.selectbox(
-        "Multiple Lines", ["No", "Yes", "No phone service"]
-    )
+    multiple_lines = st.selectbox("Multiple Lines", ["No", "Yes", "No phone service"])
     monthly_charges = st.number_input(
         "Monthly Charges ($)",
         min_value=18.0,
@@ -197,27 +185,25 @@ if predict_btn:
                             st.write(
                                 "This customer profile shows strong indicators of potential cancellation."
                             )
-                            st.markdown(
-                                """
+                            st.markdown("""
                                 **Recommended Actions:**
                                 * Offer annual contract conversion discounts.
                                 * Upgrade internet speed or add complimentary tech support.
-                                """
-                            )
+                                """)
                         else:
                             st.success("✅ **LOW RISK CUSTOMER**")
                             st.write(
                                 "Customer displays stable usage patterns and low risk profile."
                             )
-                            st.markdown(
-                                """
+                            st.markdown("""
                                 **Recommended Actions:**
                                 * Cross-sell higher tier value bundles.
                                 * Invite to loyalty feedback program.
-                                """
-                            )
+                                """)
                 else:
-                    st.error(f"Inference Error ({response.status_code}): {response.text}")
+                    st.error(
+                        f"Inference Error ({response.status_code}): {response.text}"
+                    )
 
             except Exception as err:
                 st.error(f"Failed to communicate with prediction service: {err}")

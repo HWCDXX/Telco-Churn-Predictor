@@ -39,7 +39,6 @@ class ChurnPredictor:
         raise FileNotFoundError(
             f"Could not locate active MLmodel file at {self.model_dir} or inside {PROJECT_ROOT / 'mlruns'}"
         )
-        
 
     def _load_artifacts(self) -> Tuple[Any, List[str]]:
         """Loads MLflow pyfunc model and extracts exact feature column requirements."""
@@ -73,7 +72,9 @@ class ChurnPredictor:
             except Exception:
                 pass
 
-        print(f"✅ Loaded model & {len(feature_cols)} feature columns from {resolved_path}")
+        print(
+            f"✅ Loaded model & {len(feature_cols)} feature columns from {resolved_path}"
+        )
         return model, feature_cols
 
     def transform_features(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -110,7 +111,9 @@ class ChurnPredictor:
             raw_preds = raw_preds.tolist()
 
         pred_val = raw_preds[0] if isinstance(raw_preds, (list, tuple)) else raw_preds
-        is_churn = int(pred_val >= threshold) if isinstance(pred_val, float) else int(pred_val)
+        is_churn = (
+            int(pred_val >= threshold) if isinstance(pred_val, float) else int(pred_val)
+        )
 
         return {
             "prediction": "Likely to churn" if is_churn == 1 else "Not likely to churn",

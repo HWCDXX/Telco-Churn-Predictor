@@ -3,7 +3,12 @@ import time
 from typing import Dict, List, Tuple
 import numpy as np
 import pandas as pd
-from sklearn.metrics import classification_report, f1_score, precision_score, recall_score
+from sklearn.metrics import (
+    classification_report,
+    f1_score,
+    precision_score,
+    recall_score,
+)
 
 
 def calculate_scale_pos_weight(y_train: pd.Series) -> float:
@@ -28,7 +33,9 @@ def evaluate_thresholds(
         results.append(
             {
                 "Threshold": thresh,
-                "Precision": precision_score(y_true, preds, pos_label=1, zero_division=0),
+                "Precision": precision_score(
+                    y_true, preds, pos_label=1, zero_division=0
+                ),
                 "Recall": recall_score(y_true, preds, pos_label=1, zero_division=0),
                 "F1_Score": f1_score(y_true, preds, pos_label=1, zero_division=0),
             }

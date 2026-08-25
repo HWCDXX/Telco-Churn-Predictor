@@ -1,7 +1,8 @@
 # src/data/preprocess_data.py
 import pandas as pd
 import pandas as pd
-pd.set_option('future.no_silent_downcasting', True)
+
+pd.set_option("future.no_silent_downcasting", True)
 
 DEFAULT_BINARY_COLS = [
     "gender",
@@ -61,13 +62,10 @@ def encode_features(
 
     valid_b_cols = [col for col in b_cols if col in df.columns]
     mapping = {"Yes": 1, "No": 0, "Male": 1, "Female": 0}
-    
+
     # Fix: Added .infer_objects(copy=False) to suppress Pandas downcasting warning
     df[valid_b_cols] = (
-        df[valid_b_cols]
-        .replace(mapping)
-        .infer_objects(copy=False)
-        .astype("int64")
+        df[valid_b_cols].replace(mapping).infer_objects(copy=False).astype("int64")
     )
 
     valid_m_cols = [col for col in m_cols if col in df.columns]

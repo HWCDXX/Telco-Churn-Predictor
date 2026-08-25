@@ -3,6 +3,7 @@ import pandas as pd
 from src.data.load_data import load_raw_data
 from src.data.preprocess_data import run_preprocessing_pipeline
 
+
 def cast_booleans_to_int(df: pd.DataFrame) -> pd.DataFrame:
     """Converts all boolean columns (True/False) into integers (1/0)."""
     df = df.copy()
@@ -12,7 +13,7 @@ def cast_booleans_to_int(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def consolidate_redundant_service_dummies(df: pd.DataFrame) -> pd.DataFrame:
-    """Consolidates redundant multi-column 'No internet service' and 'No phone service' 
+    """Consolidates redundant multi-column 'No internet service' and 'No phone service'
 
     dummy variables into singular indicator columns.
     """
@@ -48,7 +49,9 @@ if __name__ == "__main__":
     from load_data import load_raw_data
     from preprocess import run_preprocessing_pipeline
 
-    raw_path = r"C:\Users\waghm\MY PROJECTS\Telco Churn Predictor\data\raw\telco_churn.csv"
+    raw_path = (
+        r"C:\Users\waghm\MY PROJECTS\Telco Churn Predictor\data\raw\telco_churn.csv"
+    )
     raw_df = load_raw_data(raw_path)
     prep_df = run_preprocessing_pipeline(raw_df)
     feat_df = engineer_features(prep_df)

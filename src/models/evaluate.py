@@ -7,9 +7,7 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 
 def plot_target_correlation(
-    df: pd.DataFrame, 
-    target_col: str = "Churn", 
-    figsize: tuple[int, int] = (4, 12)
+    df: pd.DataFrame, target_col: str = "Churn", figsize: tuple[int, int] = (4, 12)
 ) -> None:
     """Computes numeric correlations with the target column and plots a heatmap."""
     if target_col not in df.columns:
@@ -26,7 +24,7 @@ def plot_target_correlation(
 
 
 def calculate_vif(df: pd.DataFrame, target_col: str = "Churn") -> pd.DataFrame:
-    """Calculates Variance Inflation Factor (VIF) for feature columns 
+    """Calculates Variance Inflation Factor (VIF) for feature columns
 
     to detect multicollinearity.
     """
@@ -60,7 +58,9 @@ if __name__ == "__main__":
     from load_data import load_raw_data
     from preprocess import run_preprocessing_pipeline
 
-    raw_path = r"C:\Users\waghm\MY PROJECTS\Telco Churn Predictor\data\raw\telco_churn.csv"
+    raw_path = (
+        r"C:\Users\waghm\MY PROJECTS\Telco Churn Predictor\data\raw\telco_churn.csv"
+    )
     raw_df = load_raw_data(raw_path)
     df_prep = run_preprocessing_pipeline(raw_df)
     df_feat = engineer_features(df_prep)

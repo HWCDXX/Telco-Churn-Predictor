@@ -35,12 +35,14 @@ def train_and_track_xgboost(
     scale_pos_weight = calculate_scale_pos_weight(y_train)
 
     model_params = params.copy() if params else {}
-    model_params.update({
-        "random_state": 42,
-        "n_jobs": -1,
-        "scale_pos_weight": scale_pos_weight,
-        "eval_metric": "logloss",
-    })
+    model_params.update(
+        {
+            "random_state": 42,
+            "n_jobs": -1,
+            "scale_pos_weight": scale_pos_weight,
+            "eval_metric": "logloss",
+        }
+    )
 
     start_train = time.time()
     xgb = XGBClassifier(**model_params)
@@ -68,7 +70,9 @@ def train_and_track_xgboost(
 
 
 if __name__ == "__main__":
-    raw_path = r"C:\Users\waghm\MY PROJECTS\Telco Churn Predictor\data\raw\telco_churn.csv"
+    raw_path = (
+        r"C:\Users\waghm\MY PROJECTS\Telco Churn Predictor\data\raw\telco_churn.csv"
+    )
 
     df_raw = load_raw_data(raw_path)
     df_prep = run_preprocessing_pipeline(df_raw)
@@ -80,6 +84,4 @@ if __name__ == "__main__":
         "max_depth": 5,
     }
 
-    train_and_track_xgboost(
-        df=df_feat, params=sample_best_params, threshold=0.3
-    )
+    train_and_track_xgboost(df=df_feat, params=sample_best_params, threshold=0.3)

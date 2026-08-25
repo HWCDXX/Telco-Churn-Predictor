@@ -43,7 +43,9 @@ class CustomerPayload(BaseModel):
     SeniorCitizen: int = Field(..., description="1 if senior citizen, 0 otherwise")
     Partner: str = Field(..., description="'Yes' or 'No'")
     Dependents: str = Field(..., description="'Yes' or 'No'")
-    tenure: int = Field(..., ge=0, description="Months customer has stayed with company")
+    tenure: int = Field(
+        ..., ge=0, description="Months customer has stayed with company"
+    )
     PhoneService: str = Field(..., description="'Yes' or 'No'")
     MultipleLines: str = Field(..., description="'Yes', 'No', 'No phone service'")
     InternetService: str = Field(..., description="'DSL', 'Fiber optic', 'No'")
@@ -90,9 +92,13 @@ class CustomerPayload(BaseModel):
 
 
 class ChurnResponse(BaseModel):
-    prediction: str = Field(..., description="'Likely to churn' or 'Not likely to churn'")
+    prediction: str = Field(
+        ..., description="'Likely to churn' or 'Not likely to churn'"
+    )
     churn_class: int = Field(..., description="1 for churn, 0 for non-churn")
-    raw_output: float = Field(..., description="Raw probability score from XGBoost model")
+    raw_output: float = Field(
+        ..., description="Raw probability score from XGBoost model"
+    )
 
 
 # ------------------------------------------------------------------

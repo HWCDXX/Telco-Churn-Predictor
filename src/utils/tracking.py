@@ -71,7 +71,9 @@ def print_markdown_report(y_true, y_pred, threshold: float = 0.3):
     """Prints formatted evaluation report table to console."""
     report_dict = classification_report(y_true, y_pred, output_dict=True)
     report_df = pd.DataFrame(report_dict).transpose().round(3)
-    report_df.loc["accuracy", ["precision", "recall"]] = report_df.loc["accuracy", "f1-score"]
+    report_df.loc["accuracy", ["precision", "recall"]] = report_df.loc[
+        "accuracy", "f1-score"
+    ]
     report_df = report_df.reset_index().rename(columns={"index": ""})
 
     print("=" * 60)
