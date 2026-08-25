@@ -154,8 +154,8 @@ if predict_btn:
 
                 if response.status_code == 200:
                     result = response.json()
-                    probability = float(result.get("churn_probability", 0.0))
-                    prediction = int(result.get("churn_prediction", 0))
+                    probability = float(result.get("raw_output", 0.0))
+                    prediction = int(result.get("churn_class", 0))
 
                     st.markdown("## 📊 Model Inference Results")
 

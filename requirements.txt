@@ -6,9 +6,11 @@ pydantic
 xgboost
 mlflow
 pandas
+numpy
 scikit-learn
 tabulate
 optuna
 joblib
 pytest
 pytest-cov
+plotly>=5.18.0
