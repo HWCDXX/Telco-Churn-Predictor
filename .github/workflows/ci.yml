@@ -64,8 +64,8 @@ jobs:
         run: |
           python -m pytest tests/ -v
 
-  docker-build:
-    name: Validate Docker Stack Build
+  docker-build-push:
+    name: Build & Push Docker Images
     needs: test
     runs-on: ubuntu-latest
 
@@ -76,18 +76,30 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build FastAPI Backend Image
+      # Login to Docker Hub only on pushes to main (skips on PRs for safety)
+      - name: Log in to Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build & Push FastAPI Backend Image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
-          push: false
-          tags: telco-fastapi:ci-test
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/telco-fastapi:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/telco-fastapi:${{ github.sha }}
 
-      - name: Build Streamlit Frontend Image
+      - name: Build & Push Streamlit Frontend Image
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile.streamlit
-          push: false
-          tags: telco-streamlit:ci-test
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/telco-streamlit:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/telco-streamlit:${{ github.sha }}
