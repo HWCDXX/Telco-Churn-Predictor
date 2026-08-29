@@ -11,8 +11,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Configurable FastAPI Endpoint (Supports Docker Compose & Local Setup)
-BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
+# Configurable FastAPI Endpoint (Sanitizes trailing slashes for Cloud / Docker envs)
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000").rstrip("/")
 
 
 def check_backend_health():
@@ -142,8 +142,16 @@ if predict_btn:
 
                 if response.status_code == 200:
                     result = response.json()
-                    probability = float(result.get("raw_output", 0.0))
-                    prediction = int(result.get("churn_class", 0))
+                    # Fallback key resolution
+                    raw_prob = result.get("raw_output")
+                    if raw_prob is None:
+                        raw_prob = result.get("churn_probability", 0.0)
+                    probability = float(raw_prob)
+
+                    raw_class = result.get("churn_class")
+                    if raw_class is None:
+                        raw_class = result.get("prediction", 0)
+                    prediction = int(raw_class)
 
                     st.markdown("## 📊 Model Inference Results")
 
