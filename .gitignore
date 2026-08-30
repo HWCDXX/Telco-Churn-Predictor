@@ -4,6 +4,4 @@ __pycache__/
 .venv/
 env/
 venv/
-mlruns/
 .ipynb_checkpoints/
-artifacts/*.pkl

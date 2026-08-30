@@ -1,0 +1,22 @@
+artifact_path: file:///C:/Users/waghm/MY%20PROJECTS/mlruns/468603875248180035/models/m-ccf20ffda1a7422a8ff58f38289d1081/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.11.15
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: ubj
+    xgb_version: 3.2.0
+mlflow_version: 3.14.0
+model_id: m-ccf20ffda1a7422a8ff58f38289d1081
+model_size_bytes: 1095964
+model_uuid: m-ccf20ffda1a7422a8ff58f38289d1081
+prompts: null
+run_id: cf0922c175bc4d88892e8cd74be85cde
+utc_time_created: '2026-08-19 08:43:31.400122'

@@ -1,0 +1,9 @@
+artifact_location: file:///C:/Users/waghm/MY%20PROJECTS/mlruns/468603875248180035
+creation_time: 1787129005868
+effective_trace_archival_retention: null
+experiment_id: '468603875248180035'
+last_update_time: 1787129005868
+lifecycle_stage: active
+name: Telco Churn - XGBoost
+trace_location: null
+workspace: default

@@ -1,0 +1,22 @@
+artifact_path: file:///C:/Users/waghm/MY%20PROJECTS/Telco%20Churn%20Predictor/mlruns/225977856873923587/models/m-5c28683daae445cea808b85abbe9c47e/artifacts
+flavors:
+  python_function:
+    data: model.ubj
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.11.15
+  xgboost:
+    code: null
+    data: model.ubj
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: ubj
+    xgb_version: 3.2.0
+mlflow_version: 3.14.0
+model_id: m-5c28683daae445cea808b85abbe9c47e
+model_size_bytes: 374302
+model_uuid: m-5c28683daae445cea808b85abbe9c47e
+prompts: null
+run_id: 7691d96668ba40b49a6098eec048a233
+utc_time_created: '2026-08-18 12:45:58.311587'
