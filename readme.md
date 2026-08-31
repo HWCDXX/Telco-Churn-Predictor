@@ -27,7 +27,8 @@
 
 This project bridges the gap between statistical modeling and production software engineering. Rather than stopping at a Jupyter Notebook evaluation, the **Telco Churn Predictor** is implemented as a decoupled, microservice-driven MLOps system.
 
-┌─────────────────────────────────────────────────────────┐
+            
+              ┌─────────────────────────────────────────────────────────┐
               │                    USER INTERFACE                       │
               │             Streamlit Web Application                   │
               │            (Port 8501 / Render Frontend)                │
