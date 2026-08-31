@@ -16,9 +16,10 @@ BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000").rstrip("/")
 
 
 def check_backend_health():
-    """Verify connectivity to FastAPI inference service."""
+    """Verify connectivity to FastAPI inference service with cold-start buffer."""
     try:
-        res = requests.get(f"{BACKEND_URL}/health", timeout=3)
+        # Increased timeout from 3s to 15s for Render free-tier cold starts
+        res = requests.get(f"{BACKEND_URL}/health", timeout=15)
         return res.status_code == 200, res.json()
     except Exception:
         return False, {}
