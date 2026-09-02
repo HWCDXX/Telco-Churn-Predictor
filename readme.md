@@ -9,17 +9,35 @@
 
 ---
 
-## 📚 Table of Contents: Index of Chapters
+## 📚 TTelco Customer Churn Predictor: Complete Engineering Masterbook & Architectural Blueprint
+📚 Master Table of Contents
+Executive Summary & Business Genesis
 
-- [Prologue: System Architecture & Design Philosophy](#prologue-system-architecture--design-philosophy)
-- [Chapter I: Data Sourcing & Exploratory Intelligence](#chapter-i-data-sourcing--exploratory-intelligence)
-- [Chapter II: Feature Engineering & Model Development](#chapter-ii-feature-engineering--model-development)
-- [Chapter III: Experiment Tracking & Artifact Lifecycle (MLflow)](#chapter-iii-experiment-tracking--artifact-lifecycle-mlflow)
-- [Chapter IV: Containerization & Microservice Decoupling](#chapter-iv-containerization--microservice-decoupling)
-- [Chapter V: Automated Quality Gates & CI/CD Pipeline](#chapter-v-automated-quality-gates--cicd-pipeline)
-- [Chapter VI: Cloud Provisioning & Production Deployment (Render)](#chapter-vi-cloud-provisioning--production-deployment-render)
-- [Chapter VII: The Crucible of Errors (Failures & Technical Fixes)](#chapter-vii-the-crucible-of-errors-failures--technical-fixes)
-- [Epilogue: Live Endpoints & Observability Keep-Alive](#epilogue-live-endpoints--observability-keep-alive)
+Full System Architecture & Technical Specifications
+
+Data Sourcing, Exploratory Intelligence & Schema Breakdown
+
+Feature Engineering, Data Preprocessing & Scikit-Learn Pipelines
+
+Machine Learning Engine: XGBoost & Optuna Optimization
+
+MLOps & Lifecycle Management: MLflow Experiment Tracking
+
+REST API Microservice Architecture: FastAPI Infrastructure
+
+User Interface Design: Interactive Streamlit Dashboard
+
+Containerization Strategy: Docker & Multi-Container Orchestration
+
+Continuous Integration & Delivery: GitHub Actions Automation
+
+Cloud Infrastructure & Production Provisioning on Render
+
+The Crucible of Errors: Comprehensive Post-Mortems & Bug Resolutions
+
+Production Observability & Zero-Downtime Keep-Alive Strategy
+
+Future Engineering Roadmap & MLOps Maturity Model
 
 ---
 
