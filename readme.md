@@ -9,7 +9,7 @@
 
 ---
 
-## 📚 TTelco Customer Churn Predictor: Complete Engineering Masterbook & Architectural Blueprint
+## 📚 Telco Customer Churn Predictor: Complete Engineering Masterbook & Architectural Blueprint
 📚 Master Table of Contents
 Executive Summary & Business Genesis
 
