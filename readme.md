@@ -30,6 +30,7 @@ Click on any section or chapter heading below to navigate directly to that phase
 ---
 
 Executive Summary
+
 The Telco Customer Churn Predictor represents a complete, production-grade Machine Learning Operations (MLOps) ecosystem designed to quantify, predict, and mitigate subscriber attrition for enterprise telecommunications providers. Customer churn is one of the most critical financial metrics in subscription-based business models; acquiring a new customer costs between 5 to 7x more than retaining an existing one.
 
 This technical report documents the end-to-end lifecycle of the solution—transitioning from exploratory data science to a decoupled, containerized, microservice-driven cloud architecture. Operating on an automated Continuous Integration and Continuous Deployment (CI/CD) pipeline, the platform ingests raw data, processes tabular features through robust transformation gates, evaluates risk via a optimized gradient-boosted decision tree (XGBoost), and delivers real-time probability assessments through a interactive web interface and REST API.
@@ -45,6 +46,7 @@ Why? Explains the strategic business rationale, trade-offs, and design choices.
 Where? Pinpoints the precise location of the component within the physical and logical system architecture.
 
 System Architecture Blueprint
+
 The platform follows a decoupled, microservice-based design pattern that isolates machine learning inference from user interaction, ensuring independent scalability, maintainability, and security.
 
 User Interaction Layer: A Streamlit-based web portal that captures user inputs, constructs validated JSON payloads, renders interactive gauge visualization charts, and displays churn mitigation strategies.
@@ -73,6 +75,7 @@ This strategic framework forms the foundation of the system. It governs the desi
 
 
 Chapter 2: Data Sourcing & Exploratory Intelligence
+
 What?
 This phase focuses on the ingestion, inspection, and exploratory audit of the IBM Telco Customer Churn dataset. The dataset comprises 7,043 unique customer records across 21 distinct feature variables, encompassing demographic data, account tenure, subscribed services, contract structures, and financial metrics.
 
@@ -94,6 +97,7 @@ Where?
 Data auditing occurs at the boundary between raw storage and the data processing pipeline, executed inside interactive exploratory notebooks before model pipeline serialization.
 
 Chapter 3: Feature Engineering & Preprocessing Pipeline
+
 What?
 The feature engineering phase transforms raw, heterogeneous categorical strings and numerical attributes into standardized numeric arrays optimized for matrix multiplication and tree-based node splitting.
 
@@ -114,6 +118,7 @@ The preprocessing logic resides within the core Python module library (src/prepr
 
 
 Chapter 4: Model Exploration, Optimization & Tuning
+
 What?
 This phase covers algorithm selection, hyperparameter tuning using OPTUNA, and metric optimization to construct a model with strong predictive accuracy and generalization performance.
 
@@ -154,6 +159,7 @@ Model optimization runs within the offline execution scripts (src/train.py), out
 
 
 Chapter 5: Experiment Tracking & Artifact Lifecycle Management
+
 What?
 This phase establishes formal model tracking and governance using MLflow. MLflow tracks hyperparameter search runs, logs evaluation metrics, records environment configurations, and versions generated model artifacts.
 
@@ -174,6 +180,7 @@ MLflow writes metrics and binary objects locally to the ./mlruns/ tracking direc
 
 
 Chapter 6: Microservice Architecture & API Engineering
+
 What?
 The microservice layer decouples model inference logic from user interface presentation. It provides a RESTful web service engineered using FastAPI and Uvicorn, alongside an interactive user dashboard developed using Streamlit.
 
@@ -215,6 +222,7 @@ FastAPI runs on host port 8000, while Streamlit operates on host port 8501. In p
 
 
 Chapter 7: Containerization & Environment Isolation
+
 What?
 Containerization packages application code, runtime dependencies, system libraries, configuration settings, and model binary artifacts into isolated, reproducible execution units using Docker.
 
@@ -250,6 +258,7 @@ Docker definitions reside in Dockerfile.fastapi, Dockerfile.streamlit, and docke
 
 
 Chapter 8: Automated Quality Gates & CI/CD Pipeline
+
 What?
 Continuous Integration and Continuous Deployment (CI/CD) automates code quality validation, unit testing, and container deployment upon every repository update using GitHub Actions.
 
@@ -277,6 +286,7 @@ Pipeline configurations are managed in .github/workflows/ci.yml and executed on 
 
 
 Chapter 9: Cloud Infrastructure & Production Deployment
+
 What?
 Production deployment hosts the containerized applications on Render cloud infrastructure, making the API and web app publicly accessible over HTTPS.
 
@@ -324,7 +334,8 @@ Where?
 The application infrastructure runs on Render cloud web servers, exposing public HTTPS entry points for enterprise integration.
 
 
-Chapter 10: The Engineering Crucible (Detailed Failure Ledger & Root Cause Analyses)
+Chapter 10: The Engineering Crucible (Detailed Failure Ledger & Root Cause Analysis)
+
 During system development and deployment, four major technical roadblocks emerged. This section details the diagnostic process, root cause analysis, and resolution for each issue.
 
 Failure Incident 1: Deployment Failure Due to Missing Model Files
@@ -385,6 +396,7 @@ After resolving path issues, local Pytest execution failed when updating MLflow 
   └────────────────────────┘     └────────────────────────┘     └────────────────────────┘
 
   Root Cause Analysis
+  
 Recent versions of MLflow enforce security restrictions to deprecate local folder-based tracking (./mlruns) in favor of relational database backends (such as SQLite or PostgreSQL). To prevent accidental file-backed tracking in enterprise environments, MLflow raises a runtime exception unless an explicit override flag is passed in the system environment.
 
 Technical Resolution
@@ -395,6 +407,7 @@ Updated Render runtime environment variables to include MLFLOW_ALLOW_FILE_STORE=
 Re-ran local test suites, confirming tests executed without throwing maintenance mode exceptions.
 
 Failure Incident 4: Streamlit False "Backend Disconnected" Errors
+
 What Happened?
 After deploying both microservices to Render, opening the Streamlit web app displayed a red error banner:
                🔴 Backend Disconnected ([https://telco-churn-fastapi.onrender.com](https://telco-churn-fastapi.onrender.com)). Ensure FastAPI container is running.
@@ -422,6 +435,7 @@ Implemented automated keep-alive polling to prevent the backend container from e
 
 
 Chapter 11: Production Observability, Monitoring & Keep-Alive Systems
+
 What?
 Production observability maintains continuous health monitoring and availability for deployed cloud services, preventing performance degradation caused by cloud platform spin-downs.
 
@@ -454,6 +468,7 @@ Monitoring executes via external edge servers targeting the public HTTPS endpoin
 
 
 Chapter 12: Visual Audit & Project Screenshot Repository
+
 This chapter provides visual documentation placeholders for auditing the project's user interface, API endpoints, CI/CD pipeline, and monitoring systems.
 
 Audit View 1: Streamlit Interactive User Dashboard
