@@ -14,18 +14,18 @@ Click on any section or chapter heading below to navigate directly to that phase
 
 - [Executive Summary](#executive-summary)
 - [System Architecture Blueprint](#system-architecture-blueprint)
-- [Chapter 1: Strategic Inception & Business Rationale](#chapter-1-strategic-inception--business-rationale)
-- [Chapter 2: Data Sourcing & Exploratory Intelligence](#chapter-2-data-sourcing--exploratory-intelligence)
-- [Chapter 3: Feature Engineering & Preprocessing Pipeline](#chapter-3-feature-engineering--preprocessing-pipeline)
-- [Chapter 4: Model Exploration, Optimization & Tuning](#chapter-4-model-exploration-optimization--tuning)
-- [Chapter 5: Experiment Tracking & Artifact Lifecycle Management](#chapter-5-experiment-tracking--artifact-lifecycle-management)
-- [Chapter 6: Microservice Architecture & API Engineering](#chapter-6-microservice-architecture--api-engineering)
-- [Chapter 7: Containerization & Environment Isolation](#chapter-7-containerization--environment-isolation)
-- [Chapter 8: Automated Quality Gates & CI/CD Pipeline](#chapter-8-automated-quality-gates--cicd-pipeline)
-- [Chapter 9: Cloud Infrastructure & Production Deployment](#chapter-9-cloud-infrastructure--production-deployment)
-- [Chapter 10: The Engineering Crucible (Detailed Failure Ledger & Root Cause Analyses)](#chapter-10-the-engineering-crucible-detailed-failure-ledger--root-cause-analyses)
-- [Chapter 11: Production Observability, Monitoring & Keep-Alive Systems](#chapter-11-production-observability-monitoring--keep-alive-systems)
-- [Chapter 12: Visual Audit & Project Screenshot Repository](#chapter-12-visual-audit--project-screenshot-repository)
+- [Chapter 1: Strategic Inception & Business Rationale](#chapter-1-strategic-inception-business-rationale)
+- [Chapter 2: Data Sourcing & Exploratory Intelligence](#chapter-2-data-sourcing-exploratory-intelligence)
+- [Chapter 3: Feature Engineering & Preprocessing Pipeline](#chapter-3-feature-engineering-preprocessing-pipeline)
+- [Chapter 4: Model Exploration, Optimization & Tuning](#chapter-4-model-exploration-optimization-tuning)
+- [Chapter 5: Experiment Tracking & Artifact Lifecycle Management](#chapter-5-experiment-tracking-artifact-lifecycle-management)
+- [Chapter 6: Microservice Architecture & API Engineering](#chapter-6-microservice-architecture-api-engineering)
+- [Chapter 7: Containerization & Environment Isolation](#chapter-7-containerization-environment-isolation)
+- [Chapter 8: Automated Quality Gates & CI/CD Pipeline](#chapter-8-automated-quality-gates-cicd-pipeline)
+- [Chapter 9: Cloud Infrastructure & Production Deployment](#chapter-9-cloud-infrastructure-production-deployment)
+- [Chapter 10: The Engineering Crucible (Detailed Failure Ledger & Root Cause Analyses)](#chapter-10-the-engineering-crucible-detailed-failure-ledger-root-cause-analyses)
+- [Chapter 11: Production Observability, Monitoring & Keep-Alive Systems](#chapter-11-production-observability-monitoring-keep-alive-systems)
+- [Chapter 12: Visual Audit & Project Screenshot Repository](#chapter-12-visual-audit-project-screenshot-repository)
 
 ---
 
@@ -57,7 +57,8 @@ Automated CI/CD Engine: A GitHub Actions runner that triggers code quality linti
 
 Cloud Infrastructure: Multi-container Web Services hosted on Render cloud infrastructure, protected by external automated keep-alive polling.
 
-Chapter 1: Strategic Inception & Business Rationale
+Chapter 1: Strategic Inception & Business Rationale 
+
 What?
 This phase establishes the business scope and mathematical formalization of customer churn prediction. Churn is defined as the event where a subscriber terminates their service contract within a specified timeframe. The business goal is to transform reactive customer service into a proactive retention strategy.
 
