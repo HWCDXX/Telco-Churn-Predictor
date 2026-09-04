@@ -51,8 +51,6 @@ The Telco Customer Churn Predictor platform integrates open-source libraries, ML
 
 ## Table of Contents
 
-_Click on any section or chapter heading below to navigate directly to that phase of the project audit._
-
 * [Executive Summary](#executive-summary)
 * [Business Context & Approach Taken](#business-context-approach-taken)
 * [System Architecture Blueprint](#system-architecture-blueprint)
