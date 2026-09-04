@@ -19,6 +19,20 @@ _Production Architecture and Deployment Guide using XGBoost, FastAPI, Streamlit,
 
 ---
 
+## 🔗 Quick Links
+
+| Service | Description | URL |
+| :--- | :--- | :--- |
+| **Frontend Web App** | Interactive Streamlit Dashboard | [telco-streamlit-frontend.onrender.com](https://telco-streamlit-frontend.onrender.com) |
+| **Backend API** | FastAPI Swagger Interactive Documentation | [telco-churn-fastapi.onrender.com/docs](https://telco-churn-fastapi.onrender.com/docs) |
+| **API Healthcheck** | Backend Service Health Status | [telco-churn-fastapi.onrender.com/health](https://telco-churn-fastapi.onrender.com/health) |
+
+
+### 
+Notice that the FastAPI URL links to /docs. FastAPI automatically generates an interactive Swagger UI at this route, which provides a much better experience than landing on a raw JSON root endpoint.
+---
+
+
 ## Technology Stack Overview
 
 The Telco Customer Churn Predictor platform integrates open-source libraries, MLOps tools, container runtimes, and cloud infrastructure.
