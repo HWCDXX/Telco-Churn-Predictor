@@ -4,11 +4,48 @@ _Production Architecture and Deployment Guide using XGBoost, FastAPI, Streamlit,
 
 ---
 
-![CI/CD Pipeline](https://img.shields.io/github/actions/workflow/status/HWCDXX/Telco-Churn-Predictor/ci.yml?branch=main&style=for-the-badge&logo=github)
-![Docker Pulls](https://img.shields.io/docker/pulls/hwcdxx/telco-fastapi?style=for-the-badge&logo=docker)
-![Python Version](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python)
-![Framework](https://img.shields.io/badge/FastAPI-0.110+-009688?style=for-the-badge&logo=fastapi)
-![Frontend](https://img.shields.io/badge/Streamlit-1.32+-FF4B4B?style=for-the-badge&logo=streamlit)
+<!-- HEADER SHIELDS / BADGES -->
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.12" />
+  <img src="https://img.shields.io/badge/XGBoost-2.0+-EB5424?style=for-the-badge&logo=xgboost&logoColor=white" alt="XGBoost" />
+  <img src="https://img.shields.io/badge/FastAPI-0.110+-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/Streamlit-1.32+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit" />
+  <img src="https://img.shields.io/badge/MLflow-2.11+-0194E2?style=for-the-badge&logo=mlflow&logoColor=white" alt="MLflow" />
+  <img src="https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" />
+  <img src="https://img.shields.io/badge/AWS-EC2%20%7C%20S3-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white" alt="AWS Infrastructure" />
+  <img src="https://img.shields.io/badge/Render-PaaS%20Deployment-000000?style=for-the-badge&logo=render&logoColor=white" alt="Render Deployment" />
+</p>
+
+---
+
+## Technology Stack Overview
+
+The Telco Customer Churn Predictor platform integrates open-source libraries, MLOps tools, container runtimes, and cloud infrastructure.
+
+| Category | Technology | Usage & Operational Role |
+| :--- | :--- | :--- |
+| **Core Runtime** | **Python 3.12** | Primary programming language across data preprocessing, model training, and API services. |
+| **Machine Learning Engine** | **XGBoost** | Gradient-boosted decision tree algorithm for binary churn classification. |
+| **Data Processing & Preprocessing** | **Scikit-Learn**, **Pandas**, **NumPy** | Feature pipelines, median missing value imputation, and One-Hot Encoding (`OneHotEncoder`). |
+| **Hyperparameter Optimization** | **Optuna** | Bayesian hyperparameter optimization targeting Recall and ROC-AUC maximization. |
+| **Experimentation & Governance** | **MLflow** | Metric logging, parameter tracking, and model weight artifact version control. |
+| **Backend & REST API** | **FastAPI**, **Uvicorn**, **Pydantic** | Asynchronous HTTP server enforcing JSON data schema validation via Pydantic models. |
+| **User Interface** | **Streamlit** | Interactive web dashboard for parameter input, churn risk scoring, and mitigation display. |
+| **Code Quality & Testing** | **Pytest**, **Black**, **Flake8** | Automated unit testing and PEP 8 static code linting within CI/CD pipelines. |
+| **Containerization** | **Docker**, **Docker Compose** | Application isolation, multi-container bridge networking, and local deployment runtime. |
+| **Automation & CI/CD** | **GitHub Actions** | Automated linting gates, test execution, Docker Hub image building, and publishing. |
+| **PaaS Cloud Infrastructure** | **Render** | Containerized cloud web services hosting for the live public API and Streamlit application. |
+| **IaaS Enterprise Infrastructure** | **AWS EC2**, **AWS S3**, **AWS IAM** | Graviton/Spot host deployment, decoupled model artifact storage, and lifecycle management. |
+
+---
+
+### Key Technical Stack Capabilities
+
+* **Machine Learning & Modeling:** Native handling of non-linear feature interactions using `XGBoost`, with loss-function optimization (`scale_pos_weight = 2.76`) to minimize costly False Negatives.
+* **API Validation & Safety:** High-throughput async endpoints using `FastAPI` that reject out-of-spec requests (`422 Unprocessable Entity`) prior to model execution using `Pydantic`.
+* **Reproducible Pipeline:** Strict `scikit-learn` Pipeline encapsulation prevents target data leakage between training partitions and live REST API inference environments.
+* **Storage & Compute Decoupling:** AWS architecture separates stateless compute (`Amazon EC2`) from persistent model artifacts (`Amazon S3`), reducing container image footprints and build times.
 
 ---
 
