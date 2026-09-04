@@ -29,7 +29,7 @@ _Click on any section or chapter heading below to navigate directly to that phas
 * [Chapter 9: Cloud Infrastructure & Production Deployment](#chapter-9)
 * [Chapter 10: The Engineering Crucible (Detailed Failure Ledger & Root Cause Analysis)](#chapter-10)
 * [Chapter 11: Production Observability, Monitoring & Keep-Alive Systems](#chapter-11)
-* [Chapter 12: Visual Audit & Project Screenshot Repository](#chapter-12)
+* [Chapter 12: Scalable AWS Infrastructure & Cost-Optimized Cloud Deployment](#chapter-12)
 
 ---
 
@@ -482,3 +482,63 @@ FAILURE DIAGNOSTIC FLOW 4
 
 **Where?** Monitoring executes via external edge servers targeting the public HTTPS endpoints of the Render cloud platform.
 
+<a id="chapter-12"></a>
+## Chapter 12: Scalable AWS Infrastructure & Cost-Optimized Cloud Deployment
+
+**What?** This phase transitions the application from a managed Platform-as-a-Service (PaaS) model to an enterprise-grade Infrastructure-as-a-Service (IaaS) architecture on Amazon Web Services (AWS). The infrastructure leverages Amazon Elastic Compute Cloud (EC2) for container execution and Amazon Simple Storage Service (S3) for decoupled model artifact governance, engineered around strict Total Cost of Ownership (TCO) optimization and financial predictability.
+
+**How?** The AWS deployment decouples stateless application compute from persistent artifact storage through four integrated infrastructure layers:
+
+* **Object Storage Layer (Amazon S3):** Model binaries (`model.xgb`) and preprocessor pipeline objects (`preprocessor.pkl`) are offloaded from container images to a dedicated S3 bucket (`s3://telco-churn-ml-artifacts/`). To minimize ongoing storage overhead, S3 Lifecycle Rules automatically transition historical MLflow runs older than 30 days to **S3 Standard-Infrequent Access (Standard-IA)** and archive runs older than 90 days to **S3 Glacier Flexible Retrieval**, cutting storage costs by up to 68%.
+* **Cost-Optimized Compute (Amazon EC2):** Containers run on **AWS Graviton-powered ARM instances (e.g., `t4g.small`)** or **Spot Instances** rather than traditional x86 On-Demand nodes. Graviton chips deliver up to 40% better price-performance over equivalent x86 instances. Docker Compose orchestrates the FastAPI and Streamlit containers directly on the instance host.
+* **Identity & Access Management (IAM):** Secure authentication uses an **IAM EC2 Instance Profile** granting read-only S3 access (`AmazonS3ReadOnlyAccess`). This eliminates hardcoded AWS Access Keys within application repositories and reduces credentials exposure risk.
+* **Deployment Automation:** GitHub Actions authenticates with AWS via OpenID Connect (OIDC), builds ARM-compatible Docker images, updates S3 model artifacts, and executes an automated deployment script over SSH to trigger zero-downtime container updates (`docker compose pull && docker compose up -d`).
+
+**Why?** Enterprise ML systems require a clear balance between performance and operational expenditure. Hosting monolithic container images with embedded model weights creates bloated Docker builds, inflates bandwidth usage during updates, and limits horizontal scaling. Storing artifacts in S3 allows the container runtime to pull lightweight model binaries on boot while keeping storage costs near zero. Furthermore, leveraging Graviton/Spot EC2 instances lowers monthly operational costs compared to flat-rate managed hosting, ensuring the architecture can scale to thousands of daily inference calls without hitting restrictive platform limits.
+
+**Where?** Cloud infrastructure configurations reside in `infra/aws/` (Terraform/CloudFormation templates), deployment scripts reside in `.github/workflows/deploy_aws.yml`, and model loading logic in `src/predict.py` reads dynamically from S3 URI paths.
+
+---
+
+## Strategic Evaluation: Render (PaaS) vs. AWS EC2 + S3 (IaaS)
+
+Selecting the appropriate deployment pathway requires balancing engineering velocity against operational cost and platform governance. Below is a comparative trade-off matrix between the lightweight PaaS pathway and the production-grade AWS IaaS architecture.
+
+### Comparative Feature Matrix
+
+| Strategic Dimension | Render (PaaS Deployment) | AWS EC2 + S3 (IaaS Deployment) |
+| :--- | :--- | :--- |
+| **Operational Overhead** | **Low:** Fully managed; zero server management or OS maintenance. | **Moderate/High:** Requires OS patching, security group audits, and Docker management. |
+| **Cost at Low Volume** | **Free / Minimal:** Predictable tier pricing; good for small prototypes. | **Ultra-Low:** Covered by AWS Free Tier or < $5/month using `t4g.micro` + S3. |
+| **Cost Scaling at High Volume**| **High:** Unit costs scale linearly per service instance; limited spot discount models. | **Optimized:** Up to 70–90% savings via Spot Instances, Graviton, and Reserved Instances. |
+| **Latency & Performance** | Subject to **cold starts** (30–40s delays) on lower/free tiers after inactivity. | **Zero cold starts:** Dedicated compute resources running 24/7 without forced spin-downs. |
+| **Artifact Governance** | Model binaries embedded directly inside the Docker image artifact. | Decoupled model storage in S3 with versioning and lifecycle policies. |
+| **Security & IAM Controls** | Basic environment variable security and platform-level SSL. | Enterprise IAM Roles, VPC network segmentation, and granular S3 access policies. |
+
+---
+
+### Render (PaaS) Pathway Analysis
+
+#### Pros
+* **Rapid Deployment Velocity:** Zero infrastructure code required; connects directly to GitHub repositories and deploys within minutes.
+* **Built-in Infrastructure Services:** Automated SSL/TLS certificate provisioning, free custom domain management, and managed HTTP reverse proxies.
+* **Low Engineering Friction:** Ideal for early-stage validation, team demos, and data science teams operating without dedicated DevOps engineers.
+
+#### Cons
+* **Cold-Start Performance Latency:** Free and entry-level tiers spin down instances after 15 minutes of inactivity, introducing 30–40 second latency spikes for initial API requests.
+* **Higher Total Cost at Scale:** Lacks flexible billing mechanisms (like Spot pricing, Reserved Capacity, or Graviton architectures), making high-concurrency scaling significantly more expensive over time.
+* **Limited Hardware & Networking Control:** Restricted access to low-level host settings, custom network firewalls, and fine-grained CPU/GPU architecture tuning.
+
+---
+
+### AWS EC2 + S3 (IaaS) Pathway Analysis
+
+#### Pros
+* **Maximum Cost Efficiency:** Leveraging AWS Graviton (`t4g`), Spot Instances, and S3 Lifecycle policies cuts monthly operating costs compared to static PaaS tiers.
+* **Decoupled Architecture:** Separating compute (EC2) from storage (S3) keeps container images small, speeds up CI/CD pipeline deployments, and simplifies version control for model weights.
+* **Enterprise Control & Scalability:** Unlocks complete control over VPC networking, security groups, IAM access policies, auto-scaling groups, and custom monitoring metrics.
+
+#### Cons
+* **Increased Maintenance Overhead:** Demands active management of host Linux environments, security patches, system updates, and Docker engine lifecycles.
+* **Higher Architectural Complexity:** Requires expertise across IAM policy configuration, SSH security, network firewalls, and AWS-specific deployment patterns.
+* **Potential Cost Overruns if Misconfigured:** Poorly managed bandwidth egress, unmonitored Elastic IPs, or misconfigured storage buckets can lead to unexpected billing charges without budget alerts.
