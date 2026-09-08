@@ -126,7 +126,8 @@ Getting a new kid costs us 7 rare Pokémon cards. Keeping a kid who's thinking a
 
 So we built a Robot Brain (XGBoost AI) tuned for MAX RECALL. The second a kid looks even 10% bored—BOOM, free sticker!
 
-Sure, it triggers false alarms and gives stickers to kids who weren't quitting. But a sticker costs 5 cents, and a lost member costs us $5 every single month. Spending 5¢ to save $5 is how we get rich.
+Sure, it triggers false alarms and gives stickers to kids who weren't quitting.
+But a sticker costs 5 cents, and a lost member costs us $5 every single month. Spending 5¢ to save $5 is how we get rich.
 
 Hand over your lunch money and invest—because with this Robot Brain, nobody leaves our club!"
 
