@@ -120,36 +120,15 @@ From an economic perspective:
                         THE "ULTIMATE SECRET CLUB" INVESTOR PITCH
 ========================================================================================
 
-"Listen up, guys! We run the coolest Secret Video Game & Ice Cream Club in school.
-Every member gives us $5 of their allowance every month to play games and get snacks.
+"Listen up, recess! Our Secret Game Club makes $5/month per kid, but members keep quitting.
 
-RIGHT NOW, WE ARE LOSING MONEY. WHY? 
-Because kids quietly walk away and quit our club! 
+Getting a new kid costs us 7 rare Pokémon cards. Keeping a kid who's thinking about quitting? Just ONE shiny sticker.
 
-To get ONE new kid to join, I have to give away 7 Rare Pokemon Cards in advertising. 
-That's super expensive! But to KEEP a kid who is thinking about quitting, I only need to 
-give them ONE shiny sticker! 
+So we built a Robot Brain (XGBoost AI) tuned for MAX RECALL. The second a kid looks even 10% bored—BOOM, free sticker!
 
-SO HERE IS MY MILLION-DOLLAR INVENTION: THE CHURN RADAR! 🤖
+Sure, it triggers false alarms and gives stickers to kids who weren't quitting. But a sticker costs 5 cents, and a lost member costs us $5 every single month. Spending 5¢ to save $5 is how we get rich.
 
-We built a super-smart Robot Brain (XGBoost AI) that watches how kids behave. 
-If a kid hasn't played games in 3 days, or complained about chocolate flavor, our Robot 
-Brain screams: 'ALERT! THIS KID IS ABOUT TO QUIT!'
-
-BEFORE they can walk out the door, we run up and give them a shiny sticker!
-
-NOW, MY ENGINE IS TUNED FOR MAXIMUM RECALL!
-What does that mean? It means my robot is set to HIGH SENSITIVITY. 
-If a kid looks even 10% bored, BOOM—Free Sticker! 
-
-Does my robot accidentally give a free sticker to a kid who wasn't actually going to quit? 
-YES! But who cares?! A sticker costs us 5 cents. But if a kid quits, we lose FIVE DOLLARS 
-every single month forever!
-
-Spending 5 cents to save 5 dollars is how we get rich. 
-
-Hand over your lunch money and invest in my company, because with this Robot Brain, 
-NOBODY LEAVES OUR CLUB AGAIN!"
+Hand over your lunch money and invest—because with this Robot Brain, nobody leaves our club!"
 
 ```
 
