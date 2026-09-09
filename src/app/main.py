@@ -1,4 +1,4 @@
-# src/app/main.py
+﻿# src/app/main.py
 import os
 from contextlib import asynccontextmanager
 from typing import Any, Dict, Optional
@@ -19,8 +19,10 @@ async def lifespan(app: FastAPI):
     """Lifecycle manager to load model into memory on API startup."""
     global predictor
     try:
-        predictor = ChurnPredictor(model_dir="./mlruns")
-        print("🚀 Model successfully loaded into FastAPI app memory.")
+        # Reads from 'models' directory by default, or MODEL_DIR env variable if set
+        model_directory = os.getenv("MODEL_DIR", "models")
+        predictor = ChurnPredictor(model_dir=model_directory)
+        print(f"🚀 Model successfully loaded into FastAPI app memory from '{model_directory}'.")
     except Exception as e:
         print(f"⚠️ Warning: Could not initialize ChurnPredictor on startup: {e}")
         predictor = None
