@@ -1,4 +1,4 @@
-﻿FROM python:3.11-slim
+﻿FROM python:3.12-slim
 
 # Create non-root user for security
 RUN groupadd -g 10001 appgroup && \
@@ -6,12 +6,15 @@ RUN groupadd -g 10001 appgroup && \
 
 WORKDIR /app
 
-# Install dependencies with layer caching
+# Install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application files and grant permissions
-COPY . .
+# Copy application files and exported model directory
+COPY src/ ./src/
+COPY models/ ./models/
+COPY app.py .
+
 RUN chown -R appuser:appgroup /app
 
 USER appuser
