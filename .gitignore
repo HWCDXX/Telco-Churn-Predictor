@@ -9,3 +9,7 @@ venv/
 mlruns/
 mlruns_test/
 .ipynb_checkpoints/
+
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
