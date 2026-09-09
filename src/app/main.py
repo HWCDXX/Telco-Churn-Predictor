@@ -1,30 +1,32 @@
 ﻿# src/app/main.py
 import os
+import logging
 from contextlib import asynccontextmanager
 from typing import Any, Dict, Optional
 
 os.environ["MLFLOW_ALLOW_FILE_STORE"] = "true"
 
 from fastapi import FastAPI, HTTPException, Query, status
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from src.serving.predict import ChurnPredictor
 
-# Global predictor instance
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("telco-churn-api")
+
 predictor: Optional[ChurnPredictor] = None
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Lifecycle manager to load model into memory on API startup."""
     global predictor
     try:
-        # Reads from 'models' directory by default, or MODEL_DIR env variable if set
         model_directory = os.getenv("MODEL_DIR", "models")
         predictor = ChurnPredictor(model_dir=model_directory)
-        print(f"🚀 Model successfully loaded into FastAPI app memory from '{model_directory}'.")
+        logger.info(f"Model successfully loaded into FastAPI memory from '{model_directory}'.")
     except Exception as e:
-        print(f"⚠️ Warning: Could not initialize ChurnPredictor on startup: {e}")
+        logger.error(f"Could not initialize ChurnPredictor on startup: {e}")
         predictor = None
     yield
 
@@ -36,18 +38,22 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# CORS Middleware setup
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Restrict to specific domains in strict enterprise environments
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# ------------------------------------------------------------------
-# Pydantic Schemas
-# ------------------------------------------------------------------
+
 class CustomerPayload(BaseModel):
     gender: str = Field(..., description="Gender ('Male', 'Female')")
     SeniorCitizen: int = Field(..., description="1 if senior citizen, 0 otherwise")
     Partner: str = Field(..., description="'Yes' or 'No'")
     Dependents: str = Field(..., description="'Yes' or 'No'")
-    tenure: int = Field(
-        ..., ge=0, description="Months customer has stayed with company"
-    )
+    tenure: int = Field(..., ge=0, description="Months customer has stayed with company")
     PhoneService: str = Field(..., description="'Yes' or 'No'")
     MultipleLines: str = Field(..., description="'Yes', 'No', 'No phone service'")
     InternetService: str = Field(..., description="'DSL', 'Fiber optic', 'No'")
@@ -94,21 +100,13 @@ class CustomerPayload(BaseModel):
 
 
 class ChurnResponse(BaseModel):
-    prediction: str = Field(
-        ..., description="'Likely to churn' or 'Not likely to churn'"
-    )
+    prediction: str = Field(..., description="'Likely to churn' or 'Not likely to churn'")
     churn_class: int = Field(..., description="1 for churn, 0 for non-churn")
-    raw_output: float = Field(
-        ..., description="Raw probability score from XGBoost model"
-    )
+    raw_output: float = Field(..., description="Raw probability score from XGBoost model")
 
 
-# ------------------------------------------------------------------
-# API Endpoints
-# ------------------------------------------------------------------
 @app.get("/", tags=["Health"])
 def root_check():
-    """Root endpoint welcoming users and confirming API availability."""
     return {
         "status": "online",
         "service": "Telco Churn Prediction API",
@@ -118,7 +116,6 @@ def root_check():
 
 @app.get("/health", tags=["Health"])
 def health_check():
-    """Health check endpoint confirming model availability."""
     if predictor is None:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -130,11 +127,8 @@ def health_check():
 @app.post("/predict", response_model=ChurnResponse, tags=["Inference"])
 def predict_churn(
     payload: CustomerPayload,
-    threshold: float = Query(
-        0.3, ge=0.0, le=1.0, description="Decision threshold for classification"
-    ),
+    threshold: float = Query(0.3, ge=0.0, le=1.0, description="Decision threshold for classification"),
 ):
-    """Runs real-time inference on a customer payload."""
     if predictor is None:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -146,6 +140,7 @@ def predict_churn(
         result = predictor.predict(input_dict, threshold=threshold)
         return result
     except Exception as e:
+        logger.error(f"Inference error: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Inference error: {str(e)}",
