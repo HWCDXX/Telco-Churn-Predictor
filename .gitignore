@@ -5,3 +5,7 @@ __pycache__/
 env/
 venv/
 .ipynb_checkpoints/
+
+mlruns/
+mlruns_test/
+.ipynb_checkpoints/
