@@ -1,9 +1,0 @@
-artifact_location: file:///C:/Users/waghm/MY%20PROJECTS/Telco%20Churn%20Predictor/mlruns/815530695629859211
-creation_time: 1787235685995
-effective_trace_archival_retention: null
-experiment_id: '815530695629859211'
-last_update_time: 1787235685995
-lifecycle_stage: active
-name: Test
-trace_location: null
-workspace: default
