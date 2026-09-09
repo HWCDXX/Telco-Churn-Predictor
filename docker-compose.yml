@@ -1,4 +1,4 @@
-services:
+﻿services:
   telco_fastapi_backend:
     build:
       context: .
@@ -7,6 +7,8 @@ services:
     ports:
       - "8000:8000"
     restart: always
+    networks:
+      - telco_network
 
   telco_streamlit_frontend:
     build:
@@ -18,5 +20,12 @@ services:
     environment:
       - BACKEND_URL=http://telco_fastapi_backend:8000
     depends_on:
-      - telco_fastapi_backend
+      telco_fastapi_backend:
+        condition: service_healthy
     restart: always
+    networks:
+      - telco_network
+
+networks:
+  telco_network:
+    driver: bridge
