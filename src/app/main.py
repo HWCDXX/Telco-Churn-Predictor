@@ -105,3 +105,12 @@ def predict_churn(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e),
         )
+
+
+# Add at the end of src/app/main.py
+if __name__ == "__main__":
+    import uvicorn
+
+    # Dynamically bind to host port provided by Koyeb / HuggingFace
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("src.app.main:app", host="0.0.0.0", port=port, reload=False)
