@@ -96,12 +96,14 @@ with col3:
         step=1.0,
     )
     total_charges = st.number_input(
-        "Total Charges ($)",
-        min_value=18.0,
-        max_value=9000.0,
-        value=float(tenure * monthly_charges),
-        step=10.0,
-    )
+    "Total Charges ($)",
+    min_value=18.0,
+    max_value=9000.0,
+    value=float(tenure * monthly_charges),
+    step=10.0,
+    help="Default calculated as Tenure × Monthly Charges. Adjust manually if needed."
+)
+
 
 # Format JSON Payload matching CustomerPayload Schema
 payload = {
@@ -137,8 +139,7 @@ if predict_btn:
     else:
         with st.spinner("Analyzing risk profile..."):
             try:
-                response = requests.post(
-                    f"{BACKEND_URL}/predict", json=payload, timeout=5
+                response = requests.post(f"{BACKEND_URL}/predict", json=payload, timeout=15
                 )
 
                 if response.status_code == 200:
