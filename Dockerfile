@@ -6,20 +6,17 @@ RUN groupadd -g 10001 appgroup && \
 
 WORKDIR /app
 
-# Install system dependencies needed for XGBoost
+# System dependencies for XGBoost
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy dependency definition
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source code
 COPY . .
 
-# Expose default port
-EXPOSE 8000
+# Hugging Face Spaces requires port 7860
+EXPOSE 7860
 
-# Start FastAPI via main.py execution block
-CMD ["python", "-m", "src.app.main"]
+CMD ["uvicorn", "src.app.main:app", "--host", "0.0.0.0", "--port", "7860"]
